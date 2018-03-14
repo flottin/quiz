@@ -1,0 +1,133 @@
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<style>
+html, body
+{
+	font-family: monaco, 'open sans';
+
+overflow: hidden;
+    -webkit-box-sizing: border-box;
+       -moz-box-sizing: border-box;
+            box-sizing: border-box;}
+body{
+position: relative;
+}
+
+div
+{
+	width: 100%;
+}
+
+.header
+{
+	font-size: 1.0em;
+	padding: 10px;
+}
+
+.button
+{
+	padding: 0px;
+	border: 0px ;
+	border-left: 5px solid rgb(51, 51, 51);
+	background: red;
+	width: 100%;
+	font-size: 1.0em;
+	height: 60px;
+	background-color: rgb(51, 51, 51);
+	color: white;
+	margin: 6px 0 6px 0;
+	text-align: center;
+	display: flex;
+	align-items: center;
+  justify-content: center;
+}
+
+.next
+{
+	border:0;
+	display: none;
+	background-color: #008CBA;
+	color: black;
+}
+.validate
+{
+	border:0;
+	background-color: #008CBA;
+	position: relative;
+	color: white;
+}
+
+.next.right
+{
+	border:0;
+	background-color: lime;
+}
+.next.wrong
+{
+	border:0;
+	background-color: red;
+}
+.content
+{
+	width:100%;
+	margin:0;
+	text-align: center;
+}
+.select
+{
+	background-color: grey;
+}
+.right
+{
+	border: 0px ;
+	border-left: 5px solid lime;
+}
+.validate.wrong{
+	background-color: red;
+}
+.validate.right{
+	background-color: lime;
+}
+
+.wrong
+{
+	border: 0px ;
+	border-left: 5px solid red;
+}
+
+.hide{
+	display:none;
+}
+.question{
+	margin: 30px 0 0 0;
+}
+
+</style>
+</head>
+
+<body>
+    <div style="text-align:center">
+      <h1>
+        Welcome to {{ title }}!
+      </h1>
+    </div>
+    <div class=answers>
+        <div *ngFor="let question of quiz" class="question"
+        id="q{{question.id}}">{{question.id}}. {{question.question}}
+            <div *ngFor="let answer of question.answers; let i=index"
+	            class="answer button true"
+	            (click)="onSelect(question, i)"
+							[ngClass]="getClass(question, i)"
+            >{{answer}}</div>
+						<button class="button validate"
+									(click)="validate(question, $event)"
+									[ngClass]="getWin(question)"
+						>{{getBtn(question)}}</button>
+
+    				<button class="button next">win suivant</button>
+        </div>
+    </div>
+</body>
+</html>
