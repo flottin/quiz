@@ -11,7 +11,7 @@ verify you have a recent version of angular cli
 ng --version
 ```
 
-if not, install it via helping with http://angular.io
+if not, install it via http://angular.io
 
 ```bash
 git clone https://github.com/flottin/quiz.git
