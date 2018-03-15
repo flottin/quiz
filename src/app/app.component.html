@@ -7,7 +7,7 @@
 <style>
 html, body
 {
-	font-family: monaco, 'open sans';
+	font-family: "Andale Mono"";
 
 overflow: hidden;
     -webkit-box-sizing: border-box;
@@ -90,9 +90,11 @@ div
 }
 .validate.wrong{
 	background-color: red;
+
 }
 .validate.right{
 	background-color: lime;
+	color: black;
 }
 
 .wrong
@@ -107,11 +109,26 @@ div
 .question{
 	margin: 30px 0 0 0;
 }
+.footer
+{
+	background-color: grey;
+	height: 500px;
+	display: flex;
+	align-items: center;
+  justify-content: center;
+  font-size: 3em;
+  margin-top: 30px;
+  color: white;
+
+}
 
 </style>
 </head>
 
 <body>
+	<audio id="wrong"><source src="assets/wrong.mp3" type="audio/mpeg"></audio>
+	<audio id="right"><source src="assets/right.mp3" type="audio/mpeg"></audio>
+
     <div style="text-align:center">
       <h1>
         Welcome to {{ title }}!
@@ -126,6 +143,7 @@ div
 							[ngClass]="getClass(question, i)"
             >{{answer}}</div>
 						<button class="button validate"
+						id="validate{{question.id}}"
 									(click)="validate(question, $event)"
 									[ngClass]="getWin(question)"
 						>{{getBtn(question)}}</button>
@@ -133,5 +151,8 @@ div
     				<button class="button next">win suivant</button>
         </div>
     </div>
+	<div class="footer">
+	<br>quiz me!
+	</div>
 </body>
 </html>

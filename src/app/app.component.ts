@@ -12,29 +12,36 @@ import {Observable} from 'rxjs/Observable';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  title = 'quiz me';
-
+  title = 'quiz me'
   quiz = QUIZ
- apiRoot: string = "http://httpbin.org";
-  public selection:any;
-  public selected:boolean
-  public right: any;
-  public wrong:any;
-  public win: any;
-  public won: any;
-  public btn: any;
+  apiRoot: string = "http://httpbin.org"
+  public selection:     any
+  public selected:      boolean
+  public right:         any
+  public wrong:         any
+  public win:           any
+  public won:           any
+  public btn:           any
+  public num:           any
+  public numquestions:  any
 
 
 
   constructor(private http: HttpClient) {
-    this.selected   = false
-    this.selection  = [];
-    this.win        = [];
-    this.right      = [];
-    this.wrong      = [];
-    this.won      = [];
-    this.btn      = [];
+    this.selected       = false
+    this.selection      = []
+    this.win            = []
+    this.right          = []
+    this.wrong          = []
+    this.won            = []
+    this.btn            = []
+    this.num            = 0
+    this.numquestions   = 10
+  }
 
+  play(name) {
+  	 var vid = document.getElementById(name);
+      vid.play();
   }
 
   //count win
@@ -51,6 +58,26 @@ export class AppComponent implements OnInit {
     return countWin;
   }
 
+  animate(question): void{
+      var sel='#validate'   + question.id
+      var timeanim = 50
+      $(sel).animate({
+          'left': '+=5px'
+      }, timeanim);
+      $(sel).animate({
+        'left': '-=10px'
+    }, timeanim);
+      $(sel).animate({
+        'left': '+=10px'
+    }, timeanim);
+      $(sel).animate({
+        'left': '-=10px'
+    }, timeanim);
+      $(sel).animate({
+        'left': '+=5px'
+    }, timeanim);
+  }
+
   // click on validate button
   validate(question, event) {
 //var ok = this.http.get('http://httpbin.org/get').subscribe(resp => {
@@ -61,21 +88,7 @@ export class AppComponent implements OnInit {
 
   //});
 
-  $('.validate').animate({
-      'left': '+=5px'
-  }, 100);
-  $('.validate').animate({
-    'left': '-=10px'
-  }, 100);
-  $('.validate').animate({
-    'left': '+=10px'
-  }, 100);
-  $('.validate').animate({
-    'left': '-=10px'
-  }, 100);
-  $('.validate').animate({
-    'left': '+=5px'
-  }, 100);
+    this.animate(question)
 
     var ind         = 0
     var i           = 0
@@ -116,12 +129,22 @@ export class AppComponent implements OnInit {
       }
     }
 
+    if (won === true) {
+        this.num ++
+        this.play('right')
+    }
+    else
+    {
+        this.play('wrong')
+    }
+
     this.won[question.id] = won
     this.btn      = [];
     for (ind = 0 ; ind < win.length ; ind++)
     {
       if ("true" === win[ind])
       {
+
         this.right.push(question.id+'-'+ind)
       }
       if ("false" === win[ind])
@@ -138,11 +161,12 @@ export class AppComponent implements OnInit {
     }
     else if (true == this.won[question.id])
     {
-      return 'gagné !'
+
+      return 'gagné ! ' + this.num + ' / ' + this.numquestions
     }
     else
     {
-      return 'perdu !'
+      return 'perdu ! ' + this.num + ' / ' + this.numquestions
     }
   }
 
@@ -211,7 +235,6 @@ export class AppComponent implements OnInit {
       else
         this.selection.splice(this.selection.indexOf(id), 1)
     }
-//console.log(this.selected)
   }
   ngOnInit(){
 

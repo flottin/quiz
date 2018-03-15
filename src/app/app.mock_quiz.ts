@@ -1,6 +1,7 @@
 import { Quiz } from './quiz';
 
-export const QUIZ: Quiz [] = [{
+export const QUIZ: Quiz [] = [
+{
       id: 1,
       question: "Plusieurs réponses possibles : que signifie le mot quiz?",
       answers: ["colle", "banane", "couscous", "oral"],
@@ -40,6 +41,13 @@ export const QUIZ: Quiz [] = [{
       question: "Une réponse possible. Combien de temps la guerre de cent ans a t-elle durée?",
       answers: ["100 ans", "plus de cent", "moins de cent ans", "aucune de ces réponses"],
       win: ["false", "true", "false", "false"]
+
+  },
+  {
+      id: 7,
+      question: "Une réponse possible. Quel est le plus grand pays au monde?",
+      answers: ["l'australie", "l'alaska", "la Chine", "la russie"],
+      win: ["false", "false", "false", "true"]
 
   }
 ];
