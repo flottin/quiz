@@ -5,7 +5,7 @@ You can find a version of quizme on : http://karatube.in/quizme
 
 ## installation
 
-verify you have a recent version of angular click
+verify you have a recent version of angular cli
 
 ```bash
 ng --version
