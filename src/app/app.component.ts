@@ -27,6 +27,7 @@ export class AppComponent implements OnInit {
   public numquestions:  any
   public audio_context: any;
   public stored_buffer: any;
+  public snd: any;
 
 
 
@@ -41,21 +42,33 @@ export class AppComponent implements OnInit {
     this.btn            = []
     this.num            = 0
     this.numquestions   = 10
+    this.snd = new Audio("assets/right.mp3"); // buffers automatically when created
+    this.snd.load();
   //  var AudioContext = AudioContext || webkitAudioContext;
-console.log('ok')
-  console.log(AudioContext)
-  console.log('ok')
+    console.log('ok')
+    console.log(AudioContext)
+    console.log('ok')
     this.audio_context = new AudioContext();
-
-
   }
 
 
 
 
+
+
+
+
+
+
+    playsound(){
+  this.snd.currentTime = 0
+      this.snd.play();
+    }
+
+
+
+
   loadDingSound() {
-
-
        this.stored_buffer = null;
 
         if (this.stored_buffer) {  // attempt to retrieve stored file
@@ -67,33 +80,25 @@ console.log('ok')
         } else {
 
             var request = new XMLHttpRequest();
-
             var audio_url = "assets/right.mp3"; // relative path to reach mp3 file
-
             request.open('GET', audio_url, true); // loading local file for now
             request.responseType = 'arraybuffer';
-//var buffer = request.response
-console.log(request)
-
-var ac = this.audio_context
-
-
-
+            var ac = this.audio_context
             // Decode asynchronously
             request.onload = function() {
 
-ac.decodeAudioData(request.response, function(buffer) {
+            ac.decodeAudioData(request.response, function(buffer) {
 
-    this.stored_buffer = buffer; // store buffer for replay later
+                  this.stored_buffer = buffer; // store buffer for replay later
 
-    //this.playSound(buffer);
-    var source = ac.createBufferSource(); // creates a sound source
-    source.buffer = buffer;                    // tell the source which sound to play
-console.log(source)
-    source.connect(ac.destination);       // connect source to speakers
-    source.start(0);
+                  //this.playSound(buffer);
+                  var source = ac.createBufferSource(); // creates a sound source
+                  source.buffer = buffer;                    // tell the source which sound to play
 
-});
+                  source.connect(ac.destination);       // connect source to speakers
+                  source.start(0);
+
+              });
 
             };
             request.send();
@@ -102,14 +107,8 @@ console.log(source)
 
 
 
-  playSound(buffer) {
 
-        var source = this.audio_context.createBufferSource(); // creates a sound source
-        source.buffer = buffer;                    // tell the source which sound to play
-    console.log(source)
-        source.connect(this.audio_context.destination);       // connect source to speakers
-        source.start(0);                           // play the source now
-    }
+
 
 
 
@@ -117,7 +116,7 @@ console.log(source)
 
 
   play(name) {
-this.loadDingSound()
+this.playsound()
       //createjs.Sound.play(name);
 
       //console.log(this.audio_context)
