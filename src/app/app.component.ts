@@ -28,6 +28,7 @@ export class AppComponent implements OnInit {
   public audio_context: any;
   public stored_buffer: any;
   public snd: any;
+  public sndwrong: any;
 
 
 
@@ -44,10 +45,8 @@ export class AppComponent implements OnInit {
     this.numquestions   = 10
     this.snd = new Audio("assets/right.mp3"); // buffers automatically when created
     this.snd.load();
-  //  var AudioContext = AudioContext || webkitAudioContext;
-    console.log('ok')
-    console.log(AudioContext)
-    console.log('ok')
+    this.sndwrong = new Audio("assets/wrong.mp3");
+    this.sndwrong.load()
     this.audio_context = new AudioContext();
   }
 
@@ -61,8 +60,8 @@ export class AppComponent implements OnInit {
 
 
     playsound(){
-  this.snd.currentTime = 0
-      this.snd.play();
+        this.snd.currentTime = 0
+        this.snd.play();
     }
 
 
@@ -81,10 +80,17 @@ export class AppComponent implements OnInit {
 
 
   play(name) {
-this.playsound()
-      //createjs.Sound.play(name);
+      if (name === 'right')
+        {
+            this.snd.currentTime = 0
+            this.snd.play();
+        }
+        else
+        {
+            this.sndwrong.currentTime = 0
+            this.sndwrong.play();
+        }
 
-      //console.log(this.audio_context)
   }
 
   //count win
@@ -131,7 +137,7 @@ this.playsound()
 
   //});
 
-    this.play('right')
+
 
     this.animate(question)
 
