@@ -68,42 +68,7 @@ export class AppComponent implements OnInit {
 
 
 
-  loadDingSound() {
-       this.stored_buffer = null;
 
-        if (this.stored_buffer) {  // attempt to retrieve stored file
-
-            console.log('playing audio from localForage');
-
-            this.playSound(this.stored_buffer);
-
-        } else {
-
-            var request = new XMLHttpRequest();
-            var audio_url = "assets/right.mp3"; // relative path to reach mp3 file
-            request.open('GET', audio_url, true); // loading local file for now
-            request.responseType = 'arraybuffer';
-            var ac = this.audio_context
-            // Decode asynchronously
-            request.onload = function() {
-
-            ac.decodeAudioData(request.response, function(buffer) {
-
-                  this.stored_buffer = buffer; // store buffer for replay later
-
-                  //this.playSound(buffer);
-                  var source = ac.createBufferSource(); // creates a sound source
-                  source.buffer = buffer;                    // tell the source which sound to play
-
-                  source.connect(ac.destination);       // connect source to speakers
-                  source.start(0);
-
-              });
-
-            };
-            request.send();
-        }
-    }
 
 
 
