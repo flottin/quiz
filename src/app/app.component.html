@@ -2,8 +2,6 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
-<title>Quizme - le quiz généraliste</title>
-<meta name="description" content="quiz généraliste angular" />
 <style>
 html, body
 {
@@ -61,17 +59,20 @@ div
 	background-color: #008CBA;
 	position: relative;
 	color: white;
+
 }
 
 .next.right
 {
 	border:0;
 	background-color: lime;
+	border-left: 5px solid lime;
 }
 .next.wrong
 {
 	border:0;
 	background-color: red;
+	border-left: 5px solid red;
 }
 .content
 {
@@ -90,10 +91,12 @@ div
 }
 .validate.wrong{
 	background-color: red;
+	border-left: 5px solid red;
 
 }
 .validate.right{
 	background-color: lime;
+	border-left: 5px solid lime;
 	color: black;
 }
 
@@ -111,8 +114,8 @@ div
 }
 .footer
 {
-	background-color: grey;
-	height: 500px;
+	background-color: gray;
+	height: 200px;
 	display: flex;
 	align-items: center;
   justify-content: center;
@@ -137,11 +140,11 @@ div
     <div class=answers>
         <div *ngFor="let question of quiz" class="question"
         id="q{{question.id}}">{{question.id}}. {{question.question}}
-            <div *ngFor="let answer of question.answers; let i=index"
+            <button *ngFor="let answer of question.answers; let i=index"
 	            class="answer button true"
 	            (click)="onSelect(question, i)"
 							[ngClass]="getClass(question, i)"
-            >{{answer}}</div>
+            >{{answer}}</button>
 						<button class="button validate"
 						id="validate{{question.id}}"
 									(click)="validate(question, $event)"
@@ -152,7 +155,9 @@ div
         </div>
     </div>
 	<div class="footer">
-	<br>quiz me!
+	quiz me!
 	</div>
 </body>
+
+
 </html>

@@ -1,6 +1,7 @@
 import { Component , OnInit} from '@angular/core';
 import { QUIZ } from './app.mock_quiz';
 import * as $ from 'jquery';
+//import createjssound from 'createjs-soundjs';
 import {Injectable} from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {Observable} from 'rxjs/Observable';
@@ -28,6 +29,7 @@ export class AppComponent implements OnInit {
 
 
   constructor(private http: HttpClient) {
+
     this.selected       = false
     this.selection      = []
     this.win            = []
@@ -40,8 +42,7 @@ export class AppComponent implements OnInit {
   }
 
   play(name) {
-  	 var vid = document.getElementById(name);
-      vid.play();
+      createjs.Sound.play(name);
   }
 
   //count win
