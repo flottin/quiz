@@ -41,6 +41,10 @@ export class AppComponent implements OnInit {
     this.btn            = []
     this.num            = 0
     this.numquestions   = 10
+  //  var AudioContext = AudioContext || webkitAudioContext;
+console.log('ok')
+  console.log(AudioContext)
+  console.log('ok')
     this.audio_context = new AudioContext();
 
 
