@@ -1,7 +1,7 @@
 import { Component , OnInit} from '@angular/core';
 import { QUIZ } from './app.mock_quiz';
 import * as $ from 'jquery';
-import * as createjs from 'createjs-module';
+//import * as createjs from 'createjs-module';
 import {Injectable} from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {Observable} from 'rxjs/Observable';
