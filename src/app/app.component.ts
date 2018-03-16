@@ -64,7 +64,7 @@ export class AppComponent implements OnInit {
 
             var request = new XMLHttpRequest();
 
-            var audio_url = "/assets/right.mp3"; // relative path to reach mp3 file
+            var audio_url = "assets/right.mp3"; // relative path to reach mp3 file
 
             request.open('GET', audio_url, true); // loading local file for now
             request.responseType = 'arraybuffer';
