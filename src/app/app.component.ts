@@ -1,7 +1,7 @@
 import { Component , OnInit} from '@angular/core';
 import { QUIZ } from './app.mock_quiz';
 import * as $ from 'jquery';
-//import createjssound from 'createjs-soundjs';
+import * as createjs from 'createjs-module';
 import {Injectable} from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {Observable} from 'rxjs/Observable';
@@ -25,6 +25,8 @@ export class AppComponent implements OnInit {
   public btn:           any
   public num:           any
   public numquestions:  any
+  public audio_context: any;
+  public stored_buffer: any;
 
 
 
@@ -39,10 +41,82 @@ export class AppComponent implements OnInit {
     this.btn            = []
     this.num            = 0
     this.numquestions   = 10
+    this.audio_context = new AudioContext();
+
+
   }
 
+
+
+
+  loadDingSound() {
+
+
+       this.stored_buffer = null;
+
+        if (this.stored_buffer) {  // attempt to retrieve stored file
+
+            console.log('playing audio from localForage');
+
+            this.playSound(this.stored_buffer);
+
+        } else {
+
+            var request = new XMLHttpRequest();
+
+            var audio_url = "/assets/right.mp3"; // relative path to reach mp3 file
+
+            request.open('GET', audio_url, true); // loading local file for now
+            request.responseType = 'arraybuffer';
+//var buffer = request.response
+console.log(request)
+
+var ac = this.audio_context
+
+
+
+            // Decode asynchronously
+            request.onload = function() {
+
+ac.decodeAudioData(request.response, function(buffer) {
+
+    this.stored_buffer = buffer; // store buffer for replay later
+
+    //this.playSound(buffer);
+    var source = ac.createBufferSource(); // creates a sound source
+    source.buffer = buffer;                    // tell the source which sound to play
+console.log(source)
+    source.connect(ac.destination);       // connect source to speakers
+    source.start(0);
+
+});
+
+            };
+            request.send();
+        }
+    }
+
+
+
+  playSound(buffer) {
+
+        var source = this.audio_context.createBufferSource(); // creates a sound source
+        source.buffer = buffer;                    // tell the source which sound to play
+    console.log(source)
+        source.connect(this.audio_context.destination);       // connect source to speakers
+        source.start(0);                           // play the source now
+    }
+
+
+
+
+
+
   play(name) {
-      createjs.Sound.play(name);
+this.loadDingSound()
+      //createjs.Sound.play(name);
+
+      //console.log(this.audio_context)
   }
 
   //count win
@@ -88,6 +162,8 @@ export class AppComponent implements OnInit {
     // And access the body directly, which is typed as MyJsonData as requested.
 
   //});
+
+    this.play('right')
 
     this.animate(question)
 
