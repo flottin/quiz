@@ -49,5 +49,26 @@ export const QUIZ: Quiz [] = [
       answers: ["l'australie", "l'alaska", "la Chine", "la russie"],
       win: ["false", "false", "false", "true"]
 
+  },
+  {
+      id: 8,
+      question: "Combien de rois la France a t'elle compté?",
+      answers: ["38", "48", "58", "68"],
+      win: ["false", "false", "false", "true"]
+
+  },
+  {
+      id: 9,
+      question: "Quel film n'a pas été réalisé par GUillermo del Toro?",
+      answers: ["The Haunted Mansion", "Pacific Rim", "La désolation de Smaug et le Hobbit", "L'échine du diable"],
+      win: ["false", "false", "true", "false"]
+
+  },
+  {
+      id: 10,
+      question: "Quel est l'intru dans les personnages de Game of Thrones?",
+      answers: ["Missandei", "Meric", "Tomund", "Vère"],
+      win: ["false", "true", "false", "false"]
+
   }
 ];
